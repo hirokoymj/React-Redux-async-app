@@ -1,0 +1,25 @@
+//
+// Home Page style
+// Mobile First CSS Method
+// Created by Hiroko Y.
+// Date: 2018-12-07
+// --------------------------------------------------
+*:focus {
+  outline: none;
+}
+.navbar{
+  border-radius: 0!important;
+}
+.submitBtn{
+  width: 100%;
+}
+
+/* Desktop (>= 992px)
+-------------------------------------------------- */
+@media (min-width: 992px) {}
+
+/* Desktop (>= 1200px)
+-------------------------------------------------- */
+@media (min-width: 1200px){}
+
+
