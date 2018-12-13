@@ -1,6 +1,8 @@
 // Filters Reducer
 const filtersReducerDefaultState = {
-  sortBy: 'name',
+  sortBy: 'id',
+  sortType: false,
+  text: ''
 };
 
 export default (state = filtersReducerDefaultState, action) => {
@@ -8,13 +10,22 @@ export default (state = filtersReducerDefaultState, action) => {
     case 'SORT_BY_NAME':
       return {
         ...state,
-        sortBy: 'name'
+        sortBy: 'name',
+        sortType: action.sortType
       };
     case 'SORT_BY_TITLE':
       return {
         ...state,
-        sortBy: 'title'
+        sortBy: 'title',
+        sortType: action.sortType
       };
+    case 'RESET_FILTERS': 
+      return filtersReducerDefaultState;    
+    case 'SET_TEXT_FILTER' :
+      return {
+        ...state,
+        text: action.text
+      }  
     default:
       return state;
   }

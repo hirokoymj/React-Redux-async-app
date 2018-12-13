@@ -1,19 +1,3 @@
-// import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-// import usersReducer from '../reducers/users';
-// import thunk from 'redux-thunk';
-
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// export default () => {
-//   const store = createStore(
-//     combineReducers({
-//       users: usersReducer,
-//     }),
-//     composeEnhancers(applyMiddleware(thunk))
-//   );
-//   return store;
-// };
-
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { createLogger } from 'redux-logger'
 import thunk from "redux-thunk";
@@ -24,8 +8,8 @@ import titlesReducer from '../reducers/jobTitles';
 import paginationReducer from '../reducers/pagination';
 import filtersReducer from '../reducers/filters';
 
-
-const middleware = applyMiddleware(promise(), thunk, createLogger())
+//const middleware = applyMiddleware(promise(), thunk, createLogger())
+const middleware = applyMiddleware(thunk, createLogger())
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
@@ -36,7 +20,7 @@ export default () => {
       employees: employeesReducer,
       titles: titlesReducer,
       pagination: paginationReducer,
-      //filters: filtersReducer
+      filters: filtersReducer
     }),    
     composeEnhancers(middleware)
   );

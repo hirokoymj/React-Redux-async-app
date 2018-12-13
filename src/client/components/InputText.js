@@ -10,7 +10,8 @@ const InputText = (props) =>{
         name={props.name} 
         value={props.value} 
         onChange={props.onChange} 
-        inputRef={props.inputRef ? props.inputRef : null} />
+        autoFocus={props.autoFocus}
+        />
     </FormGroup> 
   )
 }

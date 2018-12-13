@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, Alert} from 'react-bootstrap';
 import SingleEmployeeItem from './SingleEmployeeItem';
  
 class SingleEmployeePage extends React.Component{
@@ -10,6 +10,9 @@ class SingleEmployeePage extends React.Component{
       eid: this.props.match.params.id
     }
   }
+  // componentDidMount() {
+  //   this.getEmployeeData(this.props.eid);
+  // }
 
   getNextId = () =>{
     this.setState((prevState)=>({
@@ -32,7 +35,14 @@ class SingleEmployeePage extends React.Component{
             <h1>Employee Detail Page</h1>
             <button onClick={this.getPrevId}>Previous</button>
             <button onClick={this.getNextId}>Next</button>
-            <SingleEmployeeItem employee={this.props.employee} />
+            {
+              (typeof this.props.employee === 'undefined') ? 
+              (
+                <Alert bsStyle="warning"><h4>There is no employee data. ID: {this.state.eid}</h4></Alert>
+              ):(
+                <SingleEmployeeItem employee={this.props.employee} />
+              )
+            }
           </Col>
         </Row>
       </Grid>
@@ -41,7 +51,7 @@ class SingleEmployeePage extends React.Component{
 }
 const mapStateToProps = (state, props) => {
   return {
-    employee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id)),
+    employee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id))
   };
 };
 export default connect(mapStateToProps)(SingleEmployeePage);

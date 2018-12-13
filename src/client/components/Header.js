@@ -15,7 +15,7 @@ const Header = (props) => {
       <Navbar.Collapse>
         <Nav>
           <NavItem eventKey={1} href="/" className={cx({'active': props.history.location.pathname === '/'})}>
-            User List
+            Employee List
           </NavItem>
           <NavItem eventKey={2} href="/create" className={cx({'active': props.history.location.pathname === '/create'})}>
             Create

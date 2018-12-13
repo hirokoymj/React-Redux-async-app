@@ -16,5 +16,4 @@ const EmployeeListItem = ({dispatch, id, name, department, job_titles}) =>{
   )
 }
 
-// Changed regular React component to connected component so that dispatch can use in the component.
 export default connect()(EmployeeListItem);

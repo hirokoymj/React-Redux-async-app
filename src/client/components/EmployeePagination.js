@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { getTotalDocCount } from '../actions/pagination';
+import { resetFilters} from '../actions/filters';
 import Pagination from "react-js-pagination";
 //import {Alert} from 'react-bootstrap';
 
@@ -14,6 +15,11 @@ class EmployeePagination extends Component {
   }
 
   componentDidUpdate(prevProps){
+    if(prevProps.activePage !== this.props.activePage){
+      console.log('changed active page!!');
+      this.props.dispatch(resetFilters());
+    } 
+
     if(prevProps.employees.length !== this.props.employees.length){
       console.log('changed employee list!!');
       this.props.dispatch(getTotalDocCount());

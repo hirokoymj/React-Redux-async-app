@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { editUser } from '../actions/users'; // action generator
+//import { editUser } from '../actions/users'; // action generator
 import {editEmployee} from '../actions/employees';
-import UserForm from './UserForm';
+import EmployeeForm from './EmployeeForm';
 import {Grid, Row, Col} from 'react-bootstrap';
 
-const EditUserPage = (props) => {
+const EditEmployeePage = (props) => {
   console.log("EditUserPage", props.match.params.id);
   console.log("EditUserPage", props.employee);
 
@@ -14,7 +14,7 @@ const EditUserPage = (props) => {
       <Row>
         <Col xs={12} sm={10}>
           <h1>Edit User Page</h1>
-          <UserForm 
+          <EmployeeForm 
             employee={props.employee}
             onSubmit={(formData) => {
               props.dispatch(editEmployee(props.match.params.id, formData));
@@ -31,4 +31,4 @@ const mapStateToProps = (state, props) => {
     employee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id)),
   };
 };
-export default connect(mapStateToProps)(EditUserPage);
+export default connect(mapStateToProps)(EditEmployeePage);
