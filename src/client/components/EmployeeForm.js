@@ -32,6 +32,17 @@ class EmployeeForm extends Component{
       [e.target.name]: e.target.value
     });
   }
+  onReset = () =>{
+    this.setState({
+      firstName: '',
+      lastName: '',
+      department: '',
+      employee_annual_salary: 0,
+      job_titles: '',
+      firstNameErr: null, 
+      lastNameErr: null,        
+    });
+  }
   onSubmit = (e) =>{
     e.preventDefault();
     const {department, employee_annual_salary, id, job_titles, firstName, lastName} = this.state;
@@ -67,20 +78,13 @@ class EmployeeForm extends Component{
         "department": this.state.department,
         "employee_annual_salary": parseInt(this.state.employee_annual_salary),
         "job_titles": this.state.job_titles
-      }
-      //console.log(formData);
-      this.props.onSubmit(formData);
-      toast.success("Saved!");
-      // Reset input fields.
-      this.setState({
-        firstName: '',
-        lastName: '',
-        department: '',
-        employee_annual_salary: 0,
-        job_titles: '',
-        firstNameErr: null, 
-        lastNameErr: null,        
-      })
+    }
+    // Submit
+    this.props.onSubmit(formData);
+    // Show success message!
+    toast.success("Saved!");
+    // Reset the fields.
+    this.onReset();
     }      
   }
 

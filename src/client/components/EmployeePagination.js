@@ -20,8 +20,8 @@ class EmployeePagination extends Component {
       this.props.dispatch(resetFilters());
     } 
 
-    if(prevProps.employees.length !== this.props.employees.length){
-      console.log('changed employee list!!');
+    if(prevProps.employeesCount !== this.props.employeesCount){
+      console.log('Because of deleting the data, the length of employees has been changed!!');
       this.props.dispatch(getTotalDocCount());
     }
   }
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
   return {
     pagination: state.pagination,
     error: state.pagination.error,
-    employees: state.employees.employees,
+    employeesCount: state.employees.employees.length,
   };
 };
 export default connect(mapStateToProps)(EmployeePagination);

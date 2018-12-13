@@ -16,7 +16,6 @@ const departmentsReducer = (state=departmentsDefaultState, action) => {
       return {
         ...state,
         isFetching: false,
-        //fetched: true,
         departments: action.payload,
       }
     }

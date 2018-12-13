@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Grid, Row, Col, Alert} from 'react-bootstrap';
+import {Grid, Row, Col, Alert, Button, Panel, Pager} from 'react-bootstrap';
 import SingleEmployeeItem from './SingleEmployeeItem';
+import {deleteEmployee} from '../actions/employees';
  
 class SingleEmployeePage extends React.Component{
   constructor(props){
@@ -10,17 +11,14 @@ class SingleEmployeePage extends React.Component{
       eid: this.props.match.params.id
     }
   }
-  // componentDidMount() {
-  //   this.getEmployeeData(this.props.eid);
-  // }
 
-  getNextId = () =>{
+  getNextEmployee = () =>{
     this.setState((prevState)=>({
       eid: parseInt(prevState.eid)+1
     }));
     this.props.history.push(`/employees/${this.state.eid}`);
   }
-  getPrevId = () =>{
+  getPrevEmployee = () =>{
     this.setState((prevState)=>({
       eid: parseInt(prevState.eid)-1 === 0 ? 1 : parseInt(prevState.eid)-1
     }));
@@ -32,17 +30,38 @@ class SingleEmployeePage extends React.Component{
       <Grid>
         <Row>
           <Col xs={12} sm={10}>
-            <h1>Employee Detail Page</h1>
-            <button onClick={this.getPrevId}>Previous</button>
-            <button onClick={this.getNextId}>Next</button>
-            {
-              (typeof this.props.employee === 'undefined') ? 
-              (
-                <Alert bsStyle="warning"><h4>There is no employee data. ID: {this.state.eid}</h4></Alert>
-              ):(
-                <SingleEmployeeItem employee={this.props.employee} />
-              )
-            }
+            <Panel>
+              <Panel.Heading>
+                <Panel.Title componentClass="h3">
+                  <span className="title">Employee Details</span>
+                  <Button 
+                    bsStyle="danger"
+                    className="pull-right" 
+                    onClick={()=>{ 
+                      this.props.dispatch(deleteEmployee(this.state.eid)); 
+                      this.props.history.push('/');
+                    }}>
+                    Delete
+                  </Button>
+                  <div className="clearfix"></div>
+                </Panel.Title>
+              </Panel.Heading>
+              <Panel.Body>
+                <Pager>
+                  <Pager.Item href="#" onClick={this.getPrevEmployee}>Previous</Pager.Item>
+                  <Pager.Item href="#" onClick={this.getNextEmployee}>Next</Pager.Item>
+                </Pager>
+                <Button bsStyle="link" className="backToDashboardBtn" onClick={() => this.backToDashboardPage(this.state.eid)}>&larr; back to Dashboard</Button>
+                {
+                  (typeof this.props.foundEmployee === 'undefined') ? 
+                  (
+                    <Alert bsStyle="warning"><h4>There is no employee data. ID: {this.state.eid}</h4></Alert>
+                  ):(
+                    <SingleEmployeeItem employee={this.props.foundEmployee} />
+                  )
+                }
+              </Panel.Body>
+            </Panel> 
           </Col>
         </Row>
       </Grid>
@@ -51,7 +70,8 @@ class SingleEmployeePage extends React.Component{
 }
 const mapStateToProps = (state, props) => {
   return {
-    employee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id))
+    foundEmployee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id))
   };
 };
 export default connect(mapStateToProps)(SingleEmployeePage);
+
