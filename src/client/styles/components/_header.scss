@@ -1,0 +1,80 @@
+//
+// Header style
+// Mobile First CSS Method
+// Created by Hiroko Y.
+// Date: 2018-11-23 
+// --------------------------------------------------
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 21px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  border-color: transparent !important;
+  h2{
+    font-size: 1.15em;
+    margin: 0;
+  }
+}
+.navbar-toggle {
+  position: relative;
+  float: right;
+  margin-right: 15px;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.navbar-inverse {
+  background-color: #5e3e94;
+  border-color: #764eb9;
+  .navbar-brand {
+    color: #ffffff;
+  }
+  .navbar-nav > li > a {
+    color: #ffffff;
+  }
+
+  .navbar-nav > .active > a,
+  .navbar-nav > .active > a:hover,
+  .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #764eb9;
+  }  
+  .navbar-toggle {
+    border-color: transparent;
+    &:hover, &:focus{
+      background-color: #764eb9 !important;
+    }
+  }
+  .navbar-collapse{
+    border-color: #764eb9;
+  }      
+}
+
+// GitHub Icon
+.github-menu{
+  a{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+  .fa-github:before{
+    font-size: 40px;
+  }
+}
+
+
+
+
+
+/* Desktop (>= 992px)
+-------------------------------------------------- */
+@media (min-width: 992px) {}
+
+
+/* Desktop (>= 1200px)
+-------------------------------------------------- */
+@media (min-width: 1200px){}

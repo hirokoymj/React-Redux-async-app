@@ -12,22 +12,34 @@ const router = express.Router();
  * // URL:
  * http://localhost:8080/api/employees
  * http://localhost:8080/api/employees?page=1
+ * http://localhost:8080/api/employees?page=all
  */
 router.get('/', (req, res)=>{
   let pageSize = 100;
-  let pageNumber = (Object.getOwnPropertyNames(req.query).length===0) ? 1 : req.query.page
-  Employee
+  let pageNumber = (Object.getOwnPropertyNames(req.query).length===0) ? 1 : req.query.page;
+
+  if(pageNumber === 'all'){
+    Employee
+    .find()
+    .sort({id: 1})
+    .exec((err, employees)=>{
+      if(err) return res.status(500).send(err);
+      if(!employees) return res.status(404).send(err);
+      res.json(employees);
+    })
+  }else{
+    Employee
     .find()
     .sort({id: 1})
     .skip((pageNumber-1) * pageSize)
     .limit(pageSize)
     .exec((err, employees)=>{
-      if(err) return res.send(err);
-        //res.send(pageNumber);
-        res.json(employees);
-      })
+      if(err) return res.status(500).send(err);
+      if(!employees) return res.status(404).send(err);
+      res.json(employees);
+    })
   }
-);
+});
 
 /**
  * Returns a single employee data.
@@ -131,5 +143,6 @@ router.put('/:id', (req, res)=>{
     res.json(employee); //!!! send modified document to React.!!!
   });
 })
+
 
 module.exports = router; 

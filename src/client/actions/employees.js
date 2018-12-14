@@ -1,20 +1,46 @@
 import axios from "axios";
 
-// Example to use react-promise-middleware.
-// export const fetchDepartments  = () =>({
-//   type: "FETCH_DEPARTMENTS",
-//   payload: axios.get("/api/departments")
-// })
+// export const fetchEmployees = (page=1) => {
+//   return function(dispatch) {
+//     dispatch({type: "FETCH_EMPLOYEES"});
+//     axios.get(`/api/employees?page=${page}`)
+//       .then((response) => {
+//         dispatch({type: "FETCH_EMPLOYEES_FULFILLED", payload: response.data})
+//       })
+//       .catch((err) => {
+//         dispatch({type: "FETCH_EMPLOYEES_REJECTED", payload: err})
+//       })
+//   }
+// }
 
+// 
+// store.dispatch(fetchEmployees())
+// store.dispatch(fetchEmployees()).then(()=>{console.log('action chain!! works')})
+//
 export const fetchEmployees = (page=1) => {
   return function(dispatch) {
     dispatch({type: "FETCH_EMPLOYEES"});
-    axios.get(`/api/employees?page=${page}`)
-      .then((response) => {
+    return axios.get(`/api/employees?page=${page}`).then(
+      (response) => {
         dispatch({type: "FETCH_EMPLOYEES_FULFILLED", payload: response.data})
+      },
+      (error)=>{
+        dispatch({type: "FETCH_EMPLOYEES_REJECTED", payload: error})
+        throw error
       })
-      .catch((err) => {
-        dispatch({type: "FETCH_EMPLOYEES_REJECTED", payload: err})
+  }
+}
+
+export const fetchAllEmployees = () => {
+  return function(dispatch) {
+    dispatch({type: "FETCH_ALLEMPLOYEES"});
+    return axios.get(`/api/employees?page=all`).then(
+      (response) => {
+        dispatch({type: "FETCH_ALLEMPLOYEES_FULFILLED", payload: response.data})
+      },
+      (error)=>{
+        dispatch({type: "FETCH_ALLEMPLOYEES_REJECTED", payload: error})
+        throw error
       })
   }
 }

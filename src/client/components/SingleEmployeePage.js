@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Grid, Row, Col, Alert, Button, Panel, Pager} from 'react-bootstrap';
 import SingleEmployeeItem from './SingleEmployeeItem';
-import {deleteEmployee} from '../actions/employees';
+import { deleteEmployee, fetchAllEmployees } from '../actions/employees';
  
 class SingleEmployeePage extends React.Component{
   constructor(props){
@@ -10,6 +10,9 @@ class SingleEmployeePage extends React.Component{
     this.state = {
       eid: this.props.match.params.id
     }
+  }
+  componentDidMount(){
+    this.props.dispatch(fetchAllEmployees());
   }
 
   getNextEmployee = () =>{
@@ -24,6 +27,34 @@ class SingleEmployeePage extends React.Component{
     }));
     this.props.history.push(`/employees/${this.state.eid}`);
   }
+  backToDashboardPage = (eid) =>{
+    //const {pageNum, rowIndex} = this.calculatePageNumAndRowIndex(eid);
+    const {currentEmployeePageNum, currentEmployeeRowIndex} = this.calculatePageAndRowIndex(eid);
+    console.log(currentEmployeePageNum);
+    console.log(currentEmployeeRowIndex);
+    this.props.history.push(`/?page=${currentEmployeePageNum}`, {activeRow: currentEmployeeRowIndex});
+  }  
+
+  // Calculate page number and row index for current employee
+  calculatePageAndRowIndex = (employeeId) =>{
+    let arrayIndex = this.props.employeesAll.map((obj) => obj.id).indexOf(parseInt(employeeId));
+    //console.log('arrayIndex', arrayIndex);
+    let rowIndex = 0;
+    if(arrayIndex < 100){
+      rowIndex = arrayIndex;
+    }else{
+      rowIndex = arrayIndex%100;
+    }
+    //console.log('rowIndex', rowIndex);
+    let pageNum = Math.floor(arrayIndex/100);
+    pageNum = pageNum + 1;
+    //console.log('pageNum', pageNum);
+    const result = {
+      currentEmployeePageNum: pageNum,
+      currentEmployeeRowIndex: rowIndex
+    }
+    return result;
+  }  
 
   render(){
     return (
@@ -70,7 +101,8 @@ class SingleEmployeePage extends React.Component{
 }
 const mapStateToProps = (state, props) => {
   return {
-    foundEmployee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id))
+    foundEmployee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id)),
+    employeesAll: state.employees.employeesAll
   };
 };
 export default connect(mapStateToProps)(SingleEmployeePage);

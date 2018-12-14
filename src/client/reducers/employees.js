@@ -1,7 +1,8 @@
 const employeesDefaultState = {
   isFetching: false,
   error: null,
-  employees: []
+  employees: [],
+  employeesAll:[]
 };
 
 const employeesReducer = (state=employeesDefaultState, action) => {
@@ -19,6 +20,19 @@ const employeesReducer = (state=employeesDefaultState, action) => {
         employees: action.payload,
       }
     }
+    case "FETCH_ALLEMPLOYEES": {
+      return {...state, isFetching: true}
+    }
+    case "FETCH_ALLEMPLOYEES_REJECTED": {
+      return {...state, isFetching: false, error: action.payload}
+    }
+    case "FETCH_ALLEMPLOYEES_FULFILLED": {
+      return {
+        ...state,
+        isFetching: false,
+        employeesAll: action.payload,
+      }
+    }         
     case "DELETE_EMPLOYEE": {
       return {...state, isFetching: true}
     }

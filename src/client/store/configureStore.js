@@ -8,13 +8,11 @@ import titlesReducer from '../reducers/jobTitles';
 import paginationReducer from '../reducers/pagination';
 import filtersReducer from '../reducers/filters';
 
-//const middleware = applyMiddleware(promise(), thunk, createLogger())
 const middleware = applyMiddleware(thunk, createLogger())
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
   const store = createStore(
-    //departmentsReducer,
     combineReducers({
       departments: departmentsReducer,
       employees: employeesReducer,
