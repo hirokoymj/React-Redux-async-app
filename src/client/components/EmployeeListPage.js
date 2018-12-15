@@ -7,74 +7,42 @@ import selectEmployees from '../selectors/employees';
 import EmployeeTextFilter from './EmployeeListFilter';
 import EmployeeListHeader from './EmployeeListHeader';
 import {Link} from 'react-router-dom';
+import EmployeeListItem from './EmployeeListItem';
 
 class EmployeeListPage extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       activePage: 1,
-      activeRow: 0
+      rowRefs: []
     }
-    this.rowRefs = [];    
   }
+
   componentDidMount(){
-    if(this.props.location.search === ""){
+    if(this.props.location.state === ""){
       this.props.dispatch(
         fetchEmployees()
       ).then(()=>{
-        this.rowRefs[0] && this.rowRefs[0].focus();
+        this.state.rowRefs[0] && this.state.rowRefs[0].focus();
       })
     }else{
-      // Back from SimpleEmployee page
-      // URL: http://localhost:3000/?page=10
-      const values = this.props.location.search.split('=');
-      let page = values[1];
-      let activeRow = this.props.location.state.activeRow;
-      this.handlePageChange(page, activeRow);
+      // The page will back from SimpleEmployee page with tableView info.
+      let activePage = this.props.location.state.activePage;
+      let activeRow = this.props.location.state.activeRowIndex;
+      this.handlePageChange(activePage, activeRow);
     }    
   }
 
-  // Click on the pagination
-  handlePageChange = (pageNumber, activeRow=0) => {
+  handlePageChange = (pageNumber=1, activeRow=0) => {
     this.props.dispatch(
       fetchEmployees(pageNumber)
     ).then(()=>{
-      this.rowRefs[activeRow] && this.rowRefs[activeRow].focus(); //Focus first row.
+      this.state.rowRefs[activeRow] && this.state.rowRefs[activeRow].focus();
       this.setState({
-        activePage: pageNumber,
-        activeRow: activeRow
+        activePage: pageNumber
       });
     })
-  }
-
-  changeActiveRow = (rowIndex) =>{
-    if (this.rowRefs[rowIndex]){
-      this.rowRefs[rowIndex].focus();
-      this.setState({
-        activeRow: rowIndex
-      }) 
-    }  
-  }
-   // Enter Keyboard 
-   handleKeyDown = (e, employeeId) =>{
-    let code = e.keyCode;
-    let tabIndex = e.target.tabIndex;
-    let maxLen = this.props.employees.length; //100
-
-    if (code === 13) { //Enter key
-      this.props.history.push(`/employees/${employeeId}`);
-    }
-    if(code === 38){ //Up arrow key
-      if(tabIndex === 0) return; // The table row is reached to the first row!!
-      let prevIndex = parseInt(tabIndex)-1;
-      this.changeActiveRow(prevIndex);
-    }
-    if(code === 40){ //Down arrow key
-      if(tabIndex > maxLen) return; // The table row is reached to the last row!!
-      let nextIndex = parseInt(tabIndex)+1;
-      this.changeActiveRow(nextIndex);      
-    }    
-  } 
+  }  
 
   render() {
     if (this.props.error) return <p>ERROR!!!</p>;
@@ -86,26 +54,19 @@ class EmployeeListPage extends React.Component{
               <EmployeeTextFilter />
               <EmployeePagination 
                 activePage={this.state.activePage}
-                handlePageChange={this.handlePageChange}
-              />
+                handlePageChange={this.handlePageChange} />
               <Table bordered className="employeeListTbl">
                 <EmployeeListHeader />
                 <tbody>
                 {
                   this.props.employees.map((employee, index)=>
-                    <tr
-                      key={employee.id}
-                      tabIndex={index}
-                      onClick={() => this.changeActiveRow(index) }
-                      ref={ref=>this.rowRefs[index] = ref}
-                      onKeyDown={(e) => this.handleKeyDown(e, employee.id)}
-                      >     
-                      <td>{employee.id}</td>
-                      <td><Link to={`/employees/${employee.id}`}>{employee.name}</Link></td>
-                      <td>{employee.job_titles}</td>
-                      <td>{employee.department}</td>
-                      <td><Link to={`/edit/${employee.id}`}>Edit</Link></td>
-                    </tr>
+                    <EmployeeListItem 
+                      key={employee.id} 
+                      employee={employee} 
+                      index={index} 
+                      rowRefs={this.state.rowRefs}
+                      history={this.props.history}
+                      employeesCount={this.props.employees.length} />
                     )
                 }
                 </tbody>
@@ -121,7 +82,8 @@ const mapStateToProps = (state) => {
   return {
     //employees: state.employees.employees,
     employees: selectEmployees(state.employees.employees, state.filters),
-    error: state.employees.error
+    error: state.employees.error,
+    activeEmployeeRow: state.employees.activeEmployeeRow
   };
 };
 export default connect(mapStateToProps)(EmployeeListPage);

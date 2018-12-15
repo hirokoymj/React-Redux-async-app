@@ -2,7 +2,8 @@ const employeesDefaultState = {
   isFetching: false,
   error: null,
   employees: [],
-  employeesAll:[]
+  employeesAll:[],
+  activeEmployeeRow:0
 };
 
 const employeesReducer = (state=employeesDefaultState, action) => {
@@ -82,7 +83,7 @@ const employeesReducer = (state=employeesDefaultState, action) => {
         isFetching: false,
         employees: updatedEmployees
       }
-    }    
+    }
   }
   return state
 }

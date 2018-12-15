@@ -1,27 +1,12 @@
-# Middleware - Redux-thunk
+# React-Redux 
 
-- Redux Thunk middleware allows us to write action creators that return **a function** instead of **an action object**.
+1. Basic Redux 1 
+2. Basic Redux 2
+3. Multiple Reducers
+4. Redux Dev Tool
+5. Redux Middleware - redux-logger, redux-thunk
+6. Redux Async Actions - CRUD with redux-thunk
+7. Redux Async Actions - How to chain async actions? 
+8. Redux Async Actions - CRUD with redux-promise-middleware
 
-## Installation
-```js
-npm install redux-thunk
-```
 
-## Implementation to store
-- Import `applyMiddleware` from redux
-
-```js
-import { createStore, applyMiddleware} from 'redux';
-import usersReducer from '../reducers/users';
-import thunk from 'redux-thunk';
-
-export default () => {
-  const store = createStore(
-    usersReducer,
-    applyMiddleware(thunk)
-  );
-  return store;
-};
-```
-
-- https://github.com/reduxjs/redux-thunk

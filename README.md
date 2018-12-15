@@ -6,31 +6,19 @@ https://afternoon-thicket-91110.herokuapp.com/
 ## Front-End features
 - React.js
 - React router
+- axios
 - Redux
 - Redux Middleware - Redux Thunk, Redux Logger
 - Redux async actions
 
-**A five Redux Reducers run in the application.**
-```js
-const store = createStore(
-  combineReducers({
-    departments: departmentsReducer,
-    employees: employeesReducer,
-    titles: titlesReducer,
-    pagination: paginationReducer,
-    filters: filtersReducer
-  }),    
-  composeEnhancers(middleware)
-);
-return store;
-```
+**A five Redux async actions run in the application.**
+![](/public/images/ReduxAsyncActions.png)
 
 ## Back-End features
 - Node.js
 - Express.js
 - Mongoose/MongoDB
 - RESTful APIs 
-
 
 **List employees**
 <table style="font-size:13px">
@@ -74,9 +62,7 @@ return store;
 
 
 ## Screenshot
-![](public/images/dashboardPage.png)
-![](public/images/singleEmployeePage.png)
-![](public/images/createEmployeePage2.png)
+![](public/images/EmployeeListPage.png)
 
 
 

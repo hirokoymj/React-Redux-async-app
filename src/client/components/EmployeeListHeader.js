@@ -51,5 +51,4 @@ class EmployeeListHeader extends React.Component{
     )
   }
 }
-
 export default connect()(EmployeeListHeader);

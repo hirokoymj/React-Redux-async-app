@@ -29,14 +29,18 @@ class SingleEmployeePage extends React.Component{
   }
   backToDashboardPage = (eid) =>{
     //const {pageNum, rowIndex} = this.calculatePageNumAndRowIndex(eid);
-    const {currentEmployeePageNum, currentEmployeeRowIndex} = this.calculatePageAndRowIndex(eid);
-    console.log(currentEmployeePageNum);
-    console.log(currentEmployeeRowIndex);
-    this.props.history.push(`/?page=${currentEmployeePageNum}`, {activeRow: currentEmployeeRowIndex});
+    const tableViewInfo = this.calculatePageAndRowIndex(eid);
+    this.props.history.push('/', tableViewInfo);
   }  
 
-  // Calculate page number and row index for current employee
+  /**
+   * Calculate a page number and a row index for a current employee and use the table view in in Employee List Page.
+   * @param {number} - employeeId
+   * @returns {object} - tableViewInfo
+   * @description Culculate two values 1) page number, 2) active row index.
+   */
   calculatePageAndRowIndex = (employeeId) =>{
+    // Calculate active row index.
     let arrayIndex = this.props.employeesAll.map((obj) => obj.id).indexOf(parseInt(employeeId));
     //console.log('arrayIndex', arrayIndex);
     let rowIndex = 0;
@@ -45,15 +49,16 @@ class SingleEmployeePage extends React.Component{
     }else{
       rowIndex = arrayIndex%100;
     }
-    //console.log('rowIndex', rowIndex);
+
+    // Calculate page number.
     let pageNum = Math.floor(arrayIndex/100);
     pageNum = pageNum + 1;
     //console.log('pageNum', pageNum);
-    const result = {
-      currentEmployeePageNum: pageNum,
-      currentEmployeeRowIndex: rowIndex
+    const tableViewInfo = {
+      activePage: pageNum,
+      activeRowIndex: rowIndex
     }
-    return result;
+    return tableViewInfo;
   }  
 
   render(){
@@ -99,6 +104,7 @@ class SingleEmployeePage extends React.Component{
     )
   }
 }
+
 const mapStateToProps = (state, props) => {
   return {
     foundEmployee: state.employees.employees.find((employee) => employee.id === parseInt(props.match.params.id)),

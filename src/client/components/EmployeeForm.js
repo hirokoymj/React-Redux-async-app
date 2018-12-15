@@ -18,8 +18,8 @@ class EmployeeForm extends Component{
       department: this.props.employee ? this.props.employee.department : '',
       employee_annual_salary: this.props.employee ? this.props.employee.employee_annual_salary : 0,
       job_titles: this.props.employee ? this.props.employee.job_titles : '',
-      firstNameErr: null, // validation for first name field
-      lastNameErr: null,  // validation for last name field
+      firstNameErr: null, // validation for firstName field
+      lastNameErr: null,  // validation for lastName field
     }
   }
   componentDidMount(){

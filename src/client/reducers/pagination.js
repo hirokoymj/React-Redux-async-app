@@ -1,7 +1,7 @@
 const defaultPaginationState = {
   isFetching: false,
   error: null,
-  totalCount: 0,
+  totalCount: 0
 }
 const paginationReducer = (state=defaultPaginationState, action) =>{
   switch (action.type){

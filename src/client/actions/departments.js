@@ -1,11 +1,5 @@
 import axios from "axios";
 
-// React-promise-middleware.
-// export const fetchDepartments  = () =>({
-//   type: "FETCH_DEPARTMENTS",
-//   payload: axios.get("/api/departments")
-// })
-
 export const fetchDepartments = () => {
   return function(dispatch) {
     dispatch({type: "FETCH_DEPARTMENTS"});

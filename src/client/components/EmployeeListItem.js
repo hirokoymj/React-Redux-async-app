@@ -1,6 +1,4 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {deleteEmployee} from '../actions/employees';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 export default class EmployeeListItem extends React.Component{
@@ -9,35 +7,45 @@ export default class EmployeeListItem extends React.Component{
     this.state = {
       activeRow: 0
     }
-    this.rowRefs = [];
   }
-
+ 
   changeActiveRow = (rowIndex) =>{
-    if (this.rowRefs[rowIndex]){
-      // Highlighted row
-      this.rowRefs[rowIndex].focus();
-      // Set active row
+    if (this.props.rowRefs[rowIndex]){
+      this.props.rowRefs[rowIndex].focus();
       this.setState({
         activeRow: rowIndex
       }) 
     }  
   }
+
   // Enter Keyboard 
   handleKeyDown = (e, employeeId) =>{
     let code = e.keyCode;
+    let tabIndex = e.target.tabIndex;
+    let maxLen = this.props.employeesCount; //100
+
     if (code === 13) { //Enter key
       this.props.history.push(`/employees/${employeeId}`);
     }
-  }  
+    if(code === 38){ //Up arrow key
+      if(tabIndex === 0) return; // The table row is reached to the first row!!
+      let prevIndex = parseInt(tabIndex)-1;
+      this.changeActiveRow(prevIndex);
+    }
+    if(code === 40){ //Down arrow key
+      if(tabIndex > maxLen) return; // The table row is reached to the last row!!
+      let nextIndex = parseInt(tabIndex)+1;
+      this.changeActiveRow(nextIndex);      
+    }    
+  }
 
   render(){
-    const {id, name, department, job_titles} = this.props;
+    const {id, name, department, job_titles} = this.props.employee;
     return (
-      <tbody>
         <tr
           tabIndex={this.props.index}
+          ref={ref=>this.props.rowRefs[this.props.index] = ref}
           onClick={() => this.changeActiveRow(this.props.index) }
-          ref={ref=>this.rowRefs[this.props.index] = ref}
           onKeyDown={(e) => this.handleKeyDown(e, id)}
           >     
           <td>{id}</td>
@@ -46,10 +54,6 @@ export default class EmployeeListItem extends React.Component{
           <td>{department}</td>
           <td><Link to={`/edit/${id}`}>Edit</Link></td>
         </tr>
-      </tbody>
     )
   }
 }
-
-
-
