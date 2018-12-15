@@ -40,7 +40,7 @@ return store;
   </tr>
   <tr>
     <td style="background:#fafafa; font-weight: bold">URL</td>
-    <td>https://powerful-springs-20093.herokuapp.com/api/employees</td>
+    <td>https://afternoon-thicket-91110.herokuapp.com/api/employees</td>
   </tr>
   <tr>
     <td style="background:#fafafa; font-weight: bold">Responses</td>
@@ -60,7 +60,7 @@ return store;
   </tr>
   <tr>
     <td style="background:#fafafa; font-weight: bold">URL</td>
-    <td>https://powerful-springs-20093.herokuapp.com/api/employees/10</td>
+    <td>https://afternoon-thicket-91110.herokuapp.com/api/employees/10</td>
   </tr>
   <tr>
     <td style="background:#fafafa; font-weight: bold">Responses</td>
