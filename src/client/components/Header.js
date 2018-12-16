@@ -8,7 +8,7 @@ const Header = (props) => {
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/"><h2>React/Redux Demo</h2></a>
+          <a href="/"><h2>React/Redux async demo</h2></a>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>

@@ -20,9 +20,11 @@
   }
 }
 
-.centered{
-  text-align: center;
+.centered-container{
+  float:none;
+  margin: 0 auto;
 }
+
 .next-prev-btn{
   border-radius: 4px;
   width: 40px;
@@ -37,7 +39,6 @@
   padding-right: 5px;
   vertical-align: middle;
 }
-
 .fa-angle-left, .fa-angle-right{
   font-size:30px;
   font-weight: bold;

@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Grid, Row, Col, Alert, Button, Panel, Pager} from 'react-bootstrap';
+import {Grid, Row, Col, Alert, Button} from 'react-bootstrap';
 import SingleEmployeeItem from './SingleEmployeeItem';
-import { deleteEmployee, fetchAllEmployees } from '../actions/employees';
+import { fetchAllEmployees } from '../actions/employees';
 import 'font-awesome/css/font-awesome.min.css';
+import SingleEmployeeDelete from './SingleEmployeeDelete';
+import SingleEmployeeController from './SingleEmployeeController';
+
  
 class SingleEmployeePage extends React.Component{
   constructor(props){
@@ -17,16 +20,22 @@ class SingleEmployeePage extends React.Component{
   }
 
   getNextEmployee = () =>{
-    this.setState((prevState)=>({
-      eid: parseInt(prevState.eid)+1
-    }));
-    this.props.history.push(`/employees/${this.state.eid}`);
+    let nextId = parseInt(this.state.eid)+1;
+    //console.log("nextId", nextId);
+    this.setState({
+      eid: nextId
+    });
+    this.props.history.push(`/employees/${nextId}`);
   }
   getPrevEmployee = () =>{
-    this.setState((prevState)=>({
-      eid: parseInt(prevState.eid)-1 === 0 ? 1 : parseInt(prevState.eid)-1
-    }));
-    this.props.history.push(`/employees/${this.state.eid}`);
+    let prevId = (parseInt(this.state.eid))-1;
+    prevId = (prevId === 0) ? 1: prevId;
+    console.log(prevId);
+
+    this.setState({
+      eid: prevId
+    });
+    this.props.history.push(`/employees/${prevId}`);
   }
   backToDashboardPage = (eid) =>{
     //const {pageNum, rowIndex} = this.calculatePageNumAndRowIndex(eid);
@@ -66,34 +75,30 @@ class SingleEmployeePage extends React.Component{
     return (
       <Grid>
         <Row>
-          <Col xs={12} sm={10} md={8} className="bodyContainer">
+          <Col xs={12} sm={10} md={8} className="centered-container">
             <h1>Employee Details</h1>
           </Col>
         </Row>  
         <Row>
-          <Col xs={12} sm={10} md={8} className="bodyContainer">
+          <Col xs={12} sm={10} md={8} className="centered-container">
             <Row>  
               <Col xs={4} sm={4}>
                 <Button bsStyle="link" className="backtoDashboard" onClick={() => this.backToDashboardPage(this.state.eid)}><i className="fa fa-home"></i><span className="link-text hidden-xs">Go to dashboard</span></Button>
               </Col>        
               <Col xs={4} sm={4} className="centered">
-                <Button className="next-prev-btn" onClick={this.getPrevEmployee}><i className="fa fa-angle-left hidden-sm hidden-md hidden-lg"></i><span className="hidden-xs">Previous</span></Button>
-                <Button className="next-prev-btn" onClick={this.getNextEmployee}><span className="hidden-xs">Next</span> <i className="fa fa-angle-right hidden-sm hidden-md hidden-lg"></i> </Button>
+                <SingleEmployeeController
+                  getPrevEmployee={this.getPrevEmployee}
+                  getNextEmployee={this.getNextEmployee}
+                  />
               </Col>        
               <Col xs={4} sm={4}>
-                <Button 
-                  bsStyle="danger"
-                  className="pull-right" 
-                  onClick={()=>{ 
-                    this.props.dispatch(deleteEmployee(this.state.eid)); 
-                    this.props.history.push('/');
-                    }}><i className="fa fa-trash-o hidden-sm hidden-md hidden-lg"></i> <span className="hidden-xs">Delete</span></Button>
+                <SingleEmployeeDelete eid={this.state.eid} history={this.props.history} />
               </Col>        
             </Row>          
           </Col>
         </Row>
         <Row>
-          <Col xs={12} sm={10} md={8} className="bodyContainer">
+          <Col xs={12} sm={10} md={8} className="centered-container">
           {
             (typeof this.props.foundEmployee === 'undefined') ? 
             (
@@ -116,4 +121,13 @@ const mapStateToProps = (state, props) => {
   };
 };
 export default connect(mapStateToProps)(SingleEmployeePage);
+
+
+// <Button className="next-prev-btn" onClick={this.getPrevEmployee}><i className="fa fa-angle-left hidden-sm hidden-md hidden-lg"></i><span className="hidden-xs">Previous</span></Button>
+// <Button className="next-prev-btn" onClick={this.getNextEmployee}><span className="hidden-xs">Next</span> <i className="fa fa-angle-right hidden-sm hidden-md hidden-lg"></i> </Button>
+
+
+//<SingleEmployeeControlls eid={this.state.eid} getNextEmployee={this.getNextEmployee} />
+// <Button className="next-prev-btn" onClick={this.getPrevEmployee}><i className="fa fa-angle-left hidden-sm hidden-md hidden-lg"></i><span className="hidden-xs">Previous</span></Button>
+// <Button className="next-prev-btn" onClick={this.getNextEmployee}><span className="hidden-xs">Next</span> <i className="fa fa-angle-right hidden-sm hidden-md hidden-lg"></i> </Button>
 

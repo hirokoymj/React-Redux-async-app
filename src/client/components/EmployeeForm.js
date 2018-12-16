@@ -97,7 +97,7 @@ class EmployeeForm extends Component{
           <Selectbox name="department" options={this.props.departments} formLabel="Department" value={this.state.department} onChange={this.handleChange}/>    
           <Selectbox name="job_titles" options={this.props.titles} formLabel="Job Titles" value={this.state.job_titles} onChange={this.handleChange}/> 
           <InputText name="employee_annual_salary" type="number" formLabel="Salary" value={this.state.employee_annual_salary} onChange={this.handleChange} autoFocus={false}/>
-          <Button type="submit" type="submit" className="btn btn-success createBtn">Create</Button>
+          <Button type="submit" type="submit" bsSize="large" block>{this.props.employee? "Edit" : "Create"}</Button>
         </form>
         <ToastContainer hideProgressBar />      
       </div>

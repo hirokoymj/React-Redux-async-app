@@ -8,7 +8,7 @@ const EditEmployeePage = (props) => {
   return (
     <Grid>
       <Row>
-        <Col xs={12} sm={8} md={6} className="bodyContainer">
+        <Col xs={12} sm={8} md={6} className="edit-employee-container">
           <h1>Edit Employee Page</h1>
           <EmployeeForm 
             employee={props.employee}
