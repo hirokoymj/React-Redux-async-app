@@ -2,10 +2,10 @@
 // Dashboard Page style
 // Mobile First CSS Method
 // Created by Hiroko Y.
-// Date: 2018-11-23
+// Date: 2018-12-15
 // --------------------------------------------------
 tr:focus{
-  background-color: lightgray;
+  background-color: $third-color;
 }
 
 .pagination {
@@ -20,8 +20,10 @@ tr:focus{
 }
 
 .employeeListTbl{
+  background: #fff;
   th{
     text-align: center;
+    background: #fff;
   }
   .item-department{
     line-height: 3em;
@@ -34,8 +36,17 @@ tr:focus{
     vertical-align: middle;
     font-size: 18px;
     &:hover{
-      color: #2780e3;
+      color: $secondary-color;
     }
+  }
+  .item-id{
+    width: 6%;
+  }
+  .item-edit{
+    width: 10%;
+  }
+  .text-centered{
+    text-align:center;
   }
 
 }

@@ -19,7 +19,8 @@ class EmployeeListPage extends React.Component{
   }
 
   componentDidMount(){
-    if(this.props.location.state === ""){
+    //console.log(this.props.location.state);
+    if(typeof this.props.location.state === "undefined"){
       this.props.dispatch(
         fetchEmployees()
       ).then(()=>{
@@ -51,11 +52,12 @@ class EmployeeListPage extends React.Component{
         <Grid>
           <Row>
             <Col xs={12}>
+              <h1>Employee Dashboard</h1>
               <EmployeeTextFilter />
               <EmployeePagination 
                 activePage={this.state.activePage}
                 handlePageChange={this.handlePageChange} />
-              <Table bordered className="employeeListTbl">
+              <Table bordered responsive className="employeeListTbl">
                 <EmployeeListHeader />
                 <tbody>
                 {

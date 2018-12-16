@@ -29,13 +29,13 @@ class EmployeeListHeader extends React.Component{
     return(
       <thead>
         <tr>
-          <th>
-            Employee ID
+          <th className="item-id">
+            ID
           </th>
           <th>
             Name
             <span onClick={this.sortByName} className="sortIcon"><i className="fa fa-sort"></i></span>
-          </th>
+            </th>
           <th>
             Job Title
             <span onClick={this.sortByTitle} className="sortIcon"><i className="fa fa-sort"></i></span>
@@ -43,7 +43,7 @@ class EmployeeListHeader extends React.Component{
           <th>
             Department
           </th>
-          <th>
+          <th className="item-edit">
             EDIT
           </th>
         </tr>

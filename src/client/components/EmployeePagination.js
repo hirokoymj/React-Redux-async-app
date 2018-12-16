@@ -19,11 +19,6 @@ class EmployeePagination extends Component {
       console.log('changed active page!!');
       this.props.dispatch(resetFilters());
     } 
-
-    // if(prevProps.employeesCount !== this.props.employeesCount){
-    //   console.log('Because of deleting the data, the length of employees has been changed!!');
-    //   this.props.dispatch(getTotalDocCount());
-    // }
   }
 
   render() {

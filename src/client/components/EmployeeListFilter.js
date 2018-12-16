@@ -11,7 +11,7 @@ class EmployeeListFilter extends React.Component{
 
   render() {
     return (
-      <FormGroup className="well">
+      <FormGroup>
         <FormControl
           type="text"
           value={this.props.filters.text}

@@ -48,11 +48,11 @@ export default class EmployeeListItem extends React.Component{
           onClick={() => this.changeActiveRow(this.props.index) }
           onKeyDown={(e) => this.handleKeyDown(e, id)}
           >     
-          <td>{id}</td>
+          <td className="text-centered">{id}</td>
           <td><Link to={`/employees/${id}`}>{name}</Link></td>
           <td>{job_titles}</td>
           <td>{department}</td>
-          <td><Link to={`/edit/${id}`}>Edit</Link></td>
+          <td className="text-centered"><Link to={`/edit/${id}`}>Edit</Link></td>
         </tr>
     )
   }

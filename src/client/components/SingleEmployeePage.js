@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Grid, Row, Col, Alert, Button, Panel, Pager} from 'react-bootstrap';
 import SingleEmployeeItem from './SingleEmployeeItem';
 import { deleteEmployee, fetchAllEmployees } from '../actions/employees';
+import 'font-awesome/css/font-awesome.min.css';
  
 class SingleEmployeePage extends React.Component{
   constructor(props){
@@ -65,39 +66,42 @@ class SingleEmployeePage extends React.Component{
     return (
       <Grid>
         <Row>
-          <Col xs={12} sm={10}>
-            <Panel>
-              <Panel.Heading>
-                <Panel.Title componentClass="h3">
-                  <span className="title">Employee Details</span>
-                  <Button 
-                    bsStyle="danger"
-                    className="pull-right" 
-                    onClick={()=>{ 
-                      this.props.dispatch(deleteEmployee(this.state.eid)); 
-                      this.props.history.push('/');
-                    }}>
-                    Delete
-                  </Button>
-                  <div className="clearfix"></div>
-                </Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
-                <Pager>
-                  <Pager.Item href="#" onClick={this.getPrevEmployee}>Previous</Pager.Item>
-                  <Pager.Item href="#" onClick={this.getNextEmployee}>Next</Pager.Item>
-                </Pager>
-                <Button bsStyle="link" className="backToDashboardBtn" onClick={() => this.backToDashboardPage(this.state.eid)}>&larr; back to Dashboard</Button>
-                {
-                  (typeof this.props.foundEmployee === 'undefined') ? 
-                  (
-                    <Alert bsStyle="warning"><h4>There is no employee data. ID: {this.state.eid}</h4></Alert>
-                  ):(
-                    <SingleEmployeeItem employee={this.props.foundEmployee} />
-                  )
-                }
-              </Panel.Body>
-            </Panel> 
+          <Col xs={12} sm={10} md={8} className="bodyContainer">
+            <h1>Employee Details</h1>
+          </Col>
+        </Row>  
+        <Row>
+          <Col xs={12} sm={10} md={8} className="bodyContainer">
+            <Row>  
+              <Col xs={4} sm={4}>
+                <Button bsStyle="link" className="backtoDashboard" onClick={() => this.backToDashboardPage(this.state.eid)}><i className="fa fa-home"></i><span className="link-text hidden-xs">Go to dashboard</span></Button>
+              </Col>        
+              <Col xs={4} sm={4} className="centered">
+                <Button className="next-prev-btn" onClick={this.getPrevEmployee}><i className="fa fa-angle-left hidden-sm hidden-md hidden-lg"></i><span className="hidden-xs">Previous</span></Button>
+                <Button className="next-prev-btn" onClick={this.getNextEmployee}><span className="hidden-xs">Next</span> <i className="fa fa-angle-right hidden-sm hidden-md hidden-lg"></i> </Button>
+              </Col>        
+              <Col xs={4} sm={4}>
+                <Button 
+                  bsStyle="danger"
+                  className="pull-right" 
+                  onClick={()=>{ 
+                    this.props.dispatch(deleteEmployee(this.state.eid)); 
+                    this.props.history.push('/');
+                    }}><i className="fa fa-trash-o hidden-sm hidden-md hidden-lg"></i> <span className="hidden-xs">Delete</span></Button>
+              </Col>        
+            </Row>          
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} sm={10} md={8} className="bodyContainer">
+          {
+            (typeof this.props.foundEmployee === 'undefined') ? 
+            (
+              <Alert bsStyle="warning"><h4>There is no employee data. ID: {this.state.eid}</h4></Alert>
+            ):(
+              <SingleEmployeeItem employee={this.props.foundEmployee} />
+            )
+          }
           </Col>
         </Row>
       </Grid>

@@ -4,6 +4,23 @@
 // Created by Hiroko Y.
 // Date: 2018-11-23
 // --------------------------------------------------
+body{
+  background: #f4f4f4;
+}
+.mainContainer{
+  background: #f4f4f4;
+  border-top: 1px solid #8c8c8c;
+  font-family: Gotham,"Helvetica Neue",Helvetica,Arial,sans-serif;  
+}
+.bodyContainer{
+  float:none;
+  margin: 0 auto;
+}
+h1{
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 30px !important;
+}
 
 .centered-main-content{
   float: none;
@@ -12,5 +29,20 @@
 
 .createBtn{
   width: 100%;
-  padding: 7px 12px;
+  padding: 10px 12px;
+  font-size: 16px;
 }
+
+/* Desktop (>= 992px)
+-------------------------------------------------- */
+@media (min-width: 992px) {
+
+  h1{
+    font-size: 35px !important;
+  }
+
+}
+
+/* Desktop (>= 1200px)
+-------------------------------------------------- */
+@media (min-width: 1200px){}

@@ -4,19 +4,18 @@ import cx from 'classnames';
 import 'font-awesome/css/font-awesome.min.css';
 
 const Header = (props) => {
-  //console.log(props.history);
   return(
-    <Navbar inverse>
+    <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/"><h2>React/Redux Async Demo</h2></a>
+          <a href="/"><h2>React/Redux Demo</h2></a>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
           <NavItem eventKey={1} href="/" className={cx({'active': props.history.location.pathname === '/'})}>
-            Employee List
+            Dashboard
           </NavItem>
           <NavItem eventKey={2} href="/create" className={cx({'active': props.history.location.pathname === '/create'})}>
             Create

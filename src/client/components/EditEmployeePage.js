@@ -8,8 +8,8 @@ const EditEmployeePage = (props) => {
   return (
     <Grid>
       <Row>
-        <Col xs={12} sm={10}>
-          <h1>Edit User Page</h1>
+        <Col xs={12} sm={8} md={6} className="bodyContainer">
+          <h1>Edit Employee Page</h1>
           <EmployeeForm 
             employee={props.employee}
             onSubmit={(formData) => {
