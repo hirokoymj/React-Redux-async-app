@@ -62,5 +62,10 @@ https://afternoon-thicket-91110.herokuapp.com/
 
 
 ## Screenshot
-![](public/images/EmployeeListPage.png)
+![](public/images/DashboardPage.png)
+
+![](public/images/DetailPage.png)
+
+![](public/images/CreatePage.png)
+
 
