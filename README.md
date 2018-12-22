@@ -6,17 +6,16 @@ https://afternoon-thicket-91110.herokuapp.com/
 ## Front-End features
 - React.js
 - React router
-- axios
 - Redux
 - Redux Middleware - Redux Thunk, Redux Logger
-- Redux async actions
+- Redux Async Actions
+- Axios
 
 **A five Redux async actions run in the application.**
 ![](/public/images/ReduxAsyncActions.png)
 
 ## Back-End features
-- Node.js
-- Express.js
+- Node/Express.js
 - Mongoose/MongoDB
 - RESTful APIs 
 
