@@ -1,4 +1,4 @@
-# React/Redux async web application
+# React/Redux Async Actions Application
 
 ## Live Demo:
 https://afternoon-thicket-91110.herokuapp.com/
@@ -7,7 +7,7 @@ https://afternoon-thicket-91110.herokuapp.com/
 - React.js
 - React router
 - Redux
-- Redux Middleware - Redux Thunk, Redux Logger
+- Redux Middleware - **Redux Thunk**, Redux Logger
 - Redux Async Actions
 - Axios
 
@@ -63,8 +63,8 @@ https://afternoon-thicket-91110.herokuapp.com/
 ## Screenshot
 ![](public/images/DashboardPage.png)
 
-![](public/images/DetailPage.png)
+![](public/images/DetailPage2.png)
 
-![](public/images/CreatePage.png)
+![](public/images/CreatePage2.png)
 
 

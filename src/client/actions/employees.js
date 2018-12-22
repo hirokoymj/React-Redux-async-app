@@ -11,13 +11,12 @@ import axios from "axios";
 export const fetchEmployees = (page=1) => {
   return function(dispatch) {
     dispatch({type: "FETCH_EMPLOYEES"});
-    return axios.get(`/api/employees?page=${page}`).then(
-      (response) => {
+    return axios.get(`/api/employees?page=${page}`)
+      .then((response) => {
         dispatch({type: "FETCH_EMPLOYEES_FULFILLED", payload: response.data})
-      },
-      (error)=>{
+      })
+      .catch((err)=>{
         dispatch({type: "FETCH_EMPLOYEES_REJECTED", payload: error})
-        throw error
       })
   }
 }
@@ -31,13 +30,12 @@ export const fetchEmployees = (page=1) => {
 export const fetchAllEmployees = () => {
   return function(dispatch) {
     dispatch({type: "FETCH_ALLEMPLOYEES"});
-    return axios.get(`/api/employees?page=all`).then(
-      (response) => {
+    return axios.get(`/api/employees?page=all`)
+      .then((response) => {
         dispatch({type: "FETCH_ALLEMPLOYEES_FULFILLED", payload: response.data})
-      },
-      (error)=>{
+      })
+      .catch((err)=>{
         dispatch({type: "FETCH_ALLEMPLOYEES_REJECTED", payload: error})
-        throw error
       })
   }
 }
@@ -106,10 +104,7 @@ export const editEmployee = (id, updates) => {
       .then((response) => {
         dispatch({
           type: "EDIT_EMPLOYEE_FULFILLED",
-          payload: {
-            id,
-            updates: response.data
-          }
+          payload: response.data
         })
       })
       .catch((err) => {

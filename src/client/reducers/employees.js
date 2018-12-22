@@ -67,21 +67,19 @@ const employeesReducer = (state=employeesDefaultState, action) => {
       return {...state, isFetching: false, error: action.payload}
     }
     case "EDIT_EMPLOYEE_FULFILLED": {
-      console.log('EDIT_EMPLOYEE_FULFILLED');
-      console.log("action.id", action.payload.id)
       const updatedEmployees = state.employees.map((employee)=>{
         if(employee.id === action.payload.id){
           return {
             ...employee,
-            ...action.payload.updates
+            ...action.payload
           };
         }else{
           return employee;
         }
-      })
+      });
+      
       return {
         ...state,
-        // Override rest of properties to update.
         isFetching: false,
         employees: updatedEmployees
       }
