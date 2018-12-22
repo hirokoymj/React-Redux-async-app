@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { createEmployee } from '../actions/employees';
 import EmployeeForm from './EmployeeForm';
 import {Grid, Row, Col} from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddEmployeePage = (props) => (
     <Grid>
@@ -11,8 +13,13 @@ const AddEmployeePage = (props) => (
           <h1>Create a new employee</h1>
           <EmployeeForm 
             onSubmit={(employee) => {
-            props.dispatch(createEmployee(employee));
-          }}/>      
+            props.dispatch( createEmployee(employee) )
+              .then(()=>{
+                toast.success("Saved!");
+              })
+            ;
+          }}/>
+          <ToastContainer hideProgressBar />      
         </Col>
       </Row>    
     </Grid>

@@ -1,11 +1,11 @@
 import axios from "axios";
 
-// React-promise-middleware.
-// export const fetchDepartments  = () =>({
-//   type: "FETCH_DEPARTMENTS",
-//   payload: axios.get("/api/departments")
-// })
-
+/**
+ * Get all job title data for a dropdown menu in EmployeeForm.
+ * Calls GET request.
+ * @example
+ * store.dispatch( fetchJobTitles() )
+ */
 export const fetchJobTitles = () => {
   console.log('fetchJobTitles');
   return (dispatch)=>{

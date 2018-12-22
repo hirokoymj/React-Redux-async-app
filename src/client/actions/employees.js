@@ -1,22 +1,13 @@
 import axios from "axios";
 
-// export const fetchEmployees = (page=1) => {
-//   return function(dispatch) {
-//     dispatch({type: "FETCH_EMPLOYEES"});
-//     axios.get(`/api/employees?page=${page}`)
-//       .then((response) => {
-//         dispatch({type: "FETCH_EMPLOYEES_FULFILLED", payload: response.data})
-//       })
-//       .catch((err) => {
-//         dispatch({type: "FETCH_EMPLOYEES_REJECTED", payload: err})
-//       })
-//   }
-// }
-
-// 
-// store.dispatch(fetchEmployees())
-// store.dispatch(fetchEmployees()).then(()=>{console.log('action chain!! works')})
-//
+/**
+ * Get employee data per page. The page has 100 records as default.
+ * Calls GET request.
+ * @param {string} page - a page number
+ * @example
+ * store.dispatch(fetchEmployees(5))
+ * store.dispatch(fetchEmployees(5)).then((=>{console.log('Success!')}))
+ */
 export const fetchEmployees = (page=1) => {
   return function(dispatch) {
     dispatch({type: "FETCH_EMPLOYEES"});
@@ -31,6 +22,12 @@ export const fetchEmployees = (page=1) => {
   }
 }
 
+/**
+ * Get all employee data.
+ * Calls GET request.
+ * @example
+ * store.dispatch( fetchAllEmployees() )
+ */
 export const fetchAllEmployees = () => {
   return function(dispatch) {
     dispatch({type: "FETCH_ALLEMPLOYEES"});
@@ -45,10 +42,16 @@ export const fetchAllEmployees = () => {
   }
 }
 
+/**
+ * Delete an employee data.
+ * Calls DELETE request.
+ * @param {number} id - Employee Id
+ * @example
+ * store.dispatch( deleteEmployee(10) )
+ */
 export const deleteEmployee = (id) => {
   return function(dispatch) {
     dispatch({type: "DELETE_EMPLOYEE"});
-    console.log(`/api/employees/${id}`);
     axios.delete(`/api/employees/${id}`)
       .then((response) => {
         dispatch({type: "DELETE_EMPLOYEE_FULFILLED", payload: response.data})
@@ -59,6 +62,14 @@ export const deleteEmployee = (id) => {
   }
 }
 
+/**
+ * Add an employee.
+ * Calls POST request.
+ * @param {object} employeeData - new employee data
+ * @example
+ * store.dispatch( createEmployee(formData) )
+ * store.dispatch( createEmployee(formData) ).then(()=>{console.log('Saved!')})
+ */
 export const createEmployee = (employeeData={}) => {
   return (dispatch) => {
     const {
@@ -69,7 +80,7 @@ export const createEmployee = (employeeData={}) => {
     } = employeeData;
 
     dispatch({type: "CREATE_EMPLOYEE"});
-    axios.post('/api/employees', employeeData)
+    return axios.post('/api/employees', employeeData)
       .then((response) => {
         dispatch({type: "CREATE_EMPLOYEE_FULFILLED", payload: response.data})
       })
@@ -79,13 +90,27 @@ export const createEmployee = (employeeData={}) => {
   }
 }
 
-
+/**
+ * Edit an employee.
+ * Calls PUT request.
+ * @param {number} id - Employee Id
+ * @param {object} updates - update employee data from form
+ * @example
+ * store.dispatch( editEmployee(10, {name: "John Smith"}) )
+ * store.dispatch( editEmployee(10, {name: "John Smith"}) ).then(()=>{console.log('Edit!')})
+ */
 export const editEmployee = (id, updates) => {
-  return (dispatch) => {
+  return function(dispatch){
     dispatch({type: "EDIT_EMPLOYEE"});
-    axios.put(`/api/employees/${id}`, updates)
+    return axios.put(`/api/employees/${id}`, updates)
       .then((response) => {
-        dispatch({type: "EDIT_EMPLOYEE_FULFILLED", payload: response.data})
+        dispatch({
+          type: "EDIT_EMPLOYEE_FULFILLED",
+          payload: {
+            id,
+            updates: response.data
+          }
+        })
       })
       .catch((err) => {
         dispatch({type: "EDIT_EMPLOYEE_REJECTED", payload: err})

@@ -67,11 +67,13 @@ const employeesReducer = (state=employeesDefaultState, action) => {
       return {...state, isFetching: false, error: action.payload}
     }
     case "EDIT_EMPLOYEE_FULFILLED": {
+      console.log('EDIT_EMPLOYEE_FULFILLED');
+      console.log("action.id", action.payload.id)
       const updatedEmployees = state.employees.map((employee)=>{
-        if(employee.id === action.id){
+        if(employee.id === action.payload.id){
           return {
             ...employee,
-            ...action.updates
+            ...action.payload.updates
           };
         }else{
           return employee;

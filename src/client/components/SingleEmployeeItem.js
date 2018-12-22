@@ -1,5 +1,6 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
+import numeral from 'numeral';
 
 const SingleEmployeeItem = (props) =>{
   const {id, name, department, job_titles, employee_annual_salary} = props.employee;
@@ -24,7 +25,7 @@ const SingleEmployeeItem = (props) =>{
       </tr>
       <tr>
         <td className="item">Salary</td>
-        <td>${employee_annual_salary}</td>
+        <td>{numeral(employee_annual_salary).format('$0,0.00')}</td>
       </tr>                
       </tbody>
   </Table>    

@@ -61,7 +61,7 @@ router.get('/:id', (req, res)=>{
  * HTTP Method: POST
  * @example
  * // URL:
- * http://localhost:3000/api/employees/countDocs
+ * http://localhost:8080/api/employees/countDocs
  */
 router.post('/countDocs', (req, res)=>{
   Employee.countDocuments({}, function (err, count) {
@@ -77,7 +77,7 @@ router.post('/countDocs', (req, res)=>{
  * HTTP Method: POST
  * @example
  * // URL:
- * http://localhost:3000/api/employees
+ * http://localhost:8080/api/employees
  */
 router.post('/', (req, res)=>{
   const {name, department, employee_annual_salary, job_titles} = req.body;
@@ -126,6 +126,12 @@ router.delete('/:id', (req, res)=>{
  * http://localhost:3000/api/employees/501
  * @returns {json} - modified document: Must add options: {new: true} otherwise return an old document
  * 
+ * 
+ * {
+    "_id": "5c1aa23410047acc90c64871",
+    "name": "ACCOUNTING_TEST",
+    "__v": 0
+}
  */
 router.put('/:id', (req, res)=>{
   let id = parseInt(req.params.id);

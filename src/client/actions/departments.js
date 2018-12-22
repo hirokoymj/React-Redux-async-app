@@ -1,5 +1,11 @@
 import axios from "axios";
 
+/**
+ * Get all department data for a dropdown menu in EmployeeForm.
+ * Calls GET request.
+ * @example
+ * store.dispatch( fetchDepartments() )
+ */
 export const fetchDepartments = () => {
   return function(dispatch) {
     dispatch({type: "FETCH_DEPARTMENTS"});

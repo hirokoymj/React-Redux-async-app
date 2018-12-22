@@ -123,11 +123,4 @@ const mapStateToProps = (state, props) => {
 export default connect(mapStateToProps)(SingleEmployeePage);
 
 
-// <Button className="next-prev-btn" onClick={this.getPrevEmployee}><i className="fa fa-angle-left hidden-sm hidden-md hidden-lg"></i><span className="hidden-xs">Previous</span></Button>
-// <Button className="next-prev-btn" onClick={this.getNextEmployee}><span className="hidden-xs">Next</span> <i className="fa fa-angle-right hidden-sm hidden-md hidden-lg"></i> </Button>
-
-
-//<SingleEmployeeControlls eid={this.state.eid} getNextEmployee={this.getNextEmployee} />
-// <Button className="next-prev-btn" onClick={this.getPrevEmployee}><i className="fa fa-angle-left hidden-sm hidden-md hidden-lg"></i><span className="hidden-xs">Previous</span></Button>
-// <Button className="next-prev-btn" onClick={this.getNextEmployee}><span className="hidden-xs">Next</span> <i className="fa fa-angle-right hidden-sm hidden-md hidden-lg"></i> </Button>
 
