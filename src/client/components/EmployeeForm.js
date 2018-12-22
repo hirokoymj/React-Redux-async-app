@@ -7,6 +7,8 @@ import Selectbox from './Selectbox';
 import InputText from './InputText';
 import InputTextAddOn from './InputTextAddOn';
 import validator from 'validator';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class EmployeeForm extends Component{
   constructor(props){
@@ -97,6 +99,7 @@ class EmployeeForm extends Component{
           <InputTextAddOn name="employee_annual_salary" type="number" formLabel="Salary" value={this.state.employee_annual_salary} onChange={this.handleChange} autoFocus={false}/>
           <Button type="submit" type="submit" bsSize="large" block>{this.props.employee? "Edit" : "Create"}</Button>
         </form>
+        <ToastContainer hideProgressBar /> 
       </div>
     )
   }

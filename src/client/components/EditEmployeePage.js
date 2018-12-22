@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {editEmployee} from '../actions/employees';
 import EmployeeForm from './EmployeeForm';
 import {Grid, Row, Col} from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EditEmployeePage = (props) =>{
@@ -21,7 +21,6 @@ const EditEmployeePage = (props) =>{
                   })
               }}
             />
-            <ToastContainer hideProgressBar />      
           </Col>
         </Row>
       </Grid>
@@ -34,6 +33,9 @@ const mapStateToProps = (state, props) => {
   };
 };
 export default connect(mapStateToProps)(EditEmployeePage);
+
+// <ToastContainer hideProgressBar />      
+
 
 
 
