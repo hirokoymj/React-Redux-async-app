@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getTotalDocCount } from '../actions/pagination';
 import { resetFilters} from '../actions/filters';
 import Pagination from "react-js-pagination";
-//import {Alert} from 'react-bootstrap';
 
 class EmployeePagination extends Component { 
   constructor(props) {

@@ -25,6 +25,7 @@ class EmployeeListFilter extends React.Component{
 
 const mapStateToProps = (state) => ({
   filters: state.filters
+  
 });
 export default connect(mapStateToProps)(EmployeeListFilter);
 

@@ -2845,3 +2845,15 @@ tr:focus {
 .pagination > li > a, .pagination > li > span {
   color: #5e3e94; }
 
+.modalTitle {
+  font-size: 35px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  text-align: center; }
+
+.modal-body {
+  padding: 25px 0 0 0; }
+
+.modal-footer {
+  text-align: center; }
+
